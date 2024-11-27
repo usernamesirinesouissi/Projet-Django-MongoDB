@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion de Bibliothèque</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url("{% static 'images/bib.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(51, 51, 51, 0.8);
+            padding: 15px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .navbar a:hover {
+            background-color: #007bff;
+        }
+
+        /* Container principal */
+        .container {
+            padding: 40px 20px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 60px auto;
+            background-color: rgba(255, 255, 255, 0.9); /* La couleur de fond est un peu plus opaque mais pas totalement transparente */
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Card container */
+        .card-container {
+            display: flex;
+            justify-content: space-between; /* Cela aligne les cartes sur une ligne */
+            gap: 30px;
+            flex-wrap: nowrap; /* Assurez-vous que les cartes ne se déploient pas sous les autres */
+            margin-top: 40px;
+        }
+
+        /* Style pour chaque card */
+        .card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            width: 30%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .card p {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        /* Responsivité pour les petits écrans */
+        @media screen and (max-width: 768px) {
+            .card-container {
+                flex-direction: column; /* Sur mobile, les cartes seront empilées */
+                align-items: center;
+            }
+
+            .card {
+                width: 80%;
+                margin: 10px 0;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="{% url 'list_abonne' %}">Abonnés</a>
+        <a href="{% url 'list_document' %}">Documents</a>
+        <a href="{% url 'list_emprunt' %}">Emprunts</a>
+        <a href="{% url 'logout' %}" class="btn btn-danger" style="margin-left: auto;">Déconnexion</a>
+    </div>
+
+    <!-- Container pour le tableau de bord -->
+    <div class="container">
+        <h1>Gestion de Bibliothèque</h1>
+
+        <div class="card-container">
+            <!-- Card Abonnés avec redirection -->
+            <a href="{% url 'list_abonne' %}" class="card">
+                <h3>Nombre d'Abonnés</h3>
+                <p>{{ count_abonne }}</p>
+            </a>
+
+            <!-- Card Documents avec redirection -->
+            <a href="{% url 'list_document' %}" class="card">
+                <h3>Nombre de Documents</h3>
+                <p>{{ count_document }}</p>
+            </a>
+
+            <!-- Card Emprunts avec redirection -->
+            <a href="{% url 'list_emprunt' %}" class="card">
+                <h3>Nombre d'Emprunts</h3>
+                <p>{{ count_emprunt }}</p>
+            </a>
+        </div>
+    </div>
+
+</body>
+
+</html>

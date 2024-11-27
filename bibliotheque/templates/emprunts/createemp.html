@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un Emprunt</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #15e297;
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        input, select, button {
+            padding: 12px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus, button:focus {
+            outline: none;
+            border-color: #15e297;
+        }
+
+        button {
+            background-color: #15e297;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #15e297;
+        }
+
+        .btn-secondary {
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 12px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #ddd;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Créer un Emprunt</h1>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="id_abonne">Abonne:</label>
+                {{ form.abonne }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_document">Document:</label>
+                {{ form.document }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_date_emprunt">Date Emprunt:</label>
+                {{ form.date_emprunt }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_date_retour_prevue">Date Retour Prévues:</label>
+                {{ form.date_retour_prevue }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_statut_emprunt">Statut Emprunt:</label>
+                {{ form.statut_emprunt }}
+            </div>
+
+            <button type="submit">Enregistrer</button>
+        </form>
+        <a href="{% url 'list_emprunt' %}" class="btn-secondary">Annuler</a>
+    </div>
+</body>
+</html>

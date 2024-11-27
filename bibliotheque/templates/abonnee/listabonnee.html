@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Abonnés</title>
+
+    <!-- Intégrer le CSS directement dans le fichier HTML -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #15e297;
+            margin-top: 20px;
+        }
+         /* Styles pour la navbar */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(51, 51, 51, 0.8); /* Légèrement transparent pour voir l'image en arrière-plan */
+            padding: 15px 0;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 30px;
+            font-size: 1.1rem;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #555;
+        }
+        .search-container {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .search-container input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .search-container button {
+            padding: 10px 15px;
+            font-size: 16px;
+            color: white;
+            background-color: #15e297;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .search-container button:hover {
+            background-color: #15e297;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #15e297;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .actions a {
+            padding: 6px 12px;
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+            margin: 0 5px;
+        }
+
+        .actions a:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+      <!-- Navbar -->
+      <div class="navbar">
+        <a href="{% url 'dashboard' %}">Tableau de Bord</a> 
+        <a href="{% url 'list_document' %}">Documents</a> 
+        <a href="{% url 'list_emprunt' %}">Emprunts</a>
+    </div>
+    <h1>Liste des Abonnés</h1>
+
+    <!-- Barre de recherche -->
+    <div class="search-container">
+        <form method="GET" action="{% url 'list_abonne' %}">
+            <input type="text" name="q" value="{{ query }}" placeholder="Rechercher un abonné..." />
+            <button type="submit">Rechercher</button>
+        </form>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Adresse</th>
+                <th>Date d'inscription</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for abonne in abonnes %}
+            <tr>
+                <td>{{ abonne.nom }}</td>
+                <td>{{ abonne.prenom }}</td>
+                <td>{{ abonne.adresse }}</td>
+                <td>{{ abonne.date_inscription }}</td>
+                <td class="actions">
+                    <a href="{% url 'update_abonne' abonne.id %}">Modifier</a> |
+                    <a href="{% url 'delete_abonne' abonne.id %}">Supprimer</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="text-align: center;">Aucun abonné trouvé.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div style="text-align: center; margin: 20px;">
+        <a href="{% url 'create_abonne' %}" style="color: white; background-color: #15e297; padding: 10px 20px; border-radius: 4px; text-decoration: none;">Créer un nouvel abonné</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'Accueil</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Inclure une police depuis Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Image de fond floutée */
+        .bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('{% static "images/bib.jpg" %}') no-repeat center center/cover;
+            filter: blur(8px);
+            z-index: -1;
+        }
+
+        /* Couche transparente pour améliorer la lisibilité */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Couleur noire avec transparence */
+            z-index: -1;
+        }
+
+        /* Navbar avec nouvelle couleur et police */
+        .navbar {
+            background-color: #15e297; /* Bleu */
+        }
+
+        .navbar-brand, .nav-link {
+            color: #ffffff !important; /* Blanc */
+            font-family: 'Roboto', sans-serif; /* Nouvelle police */
+            font-weight: 700; /* Plus gras pour plus de visibilité */
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #000000 !important; /* Noir lors du survol */
+        }
+
+        .content {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            color: white;
+        }
+
+        .content h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .content p {
+            font-size: 1.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        .btn-custom {
+            margin-top: 20px;
+            background-color: #15e297;
+            color: white;
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #0fc688;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Image de fond floutée -->
+    <div class="bg"></div>
+    <div class="overlay"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">Gestion de Bibliothèque</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenu principal -->
+    <div class="content">
+        <h1>Bienvenue à la Gestion de Bibliothèque</h1>
+        <p>Gérez vos emprunts, documents et abonnés facilement.</p>
+        <a href="{% url 'login' %}" class="btn btn-custom">Explorer</a>
+    </div>
+
+    <!-- Intégrer les scripts Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

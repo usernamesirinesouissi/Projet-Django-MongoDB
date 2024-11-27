@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier un Abonné</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #15e297;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            display: block;
+            color: #333;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        textarea {
+            height: 150px;
+        }
+
+        button {
+            background-color: #15e297;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #15e297;
+        }
+
+        .btn-secondary {
+            background-color: #bbb;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Modifier l'Abonné: {{ abonne.nom }} {{ abonne.prenom }}</h1>
+        <form method="POST" action="{% url 'update_abonne' abonne.id %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nom">Nom:</label>
+                <input type="text" id="nom" name="nom" value="{{ abonne.nom }}" required>
+            </div>
+            <div class="form-group">
+                <label for="prenom">Prénom:</label>
+                <input type="text" id="prenom" name="prenom" value="{{ abonne.prenom }}" required>
+            </div>
+            <div class="form-group">
+                <label for="adresse">Adresse:</label>
+                <textarea id="adresse" name="adresse" required>{{ abonne.adresse }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="date_inscription">Date d'inscription:</label>
+                <input type="date" id="date_inscription" name="date_inscription" value="{{ abonne.date_inscription }}" required>
+            </div>
+            <button type="submit">Modifier Abonné</button>
+        </form>
+        <a href="{% url 'list_abonne' %}" class="btn-secondary">Retour à la liste</a>
+    </div>
+</body>
+</html>

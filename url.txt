@@ -1,0 +1,12 @@
+http://127.0.0.1:8000/abonne/list/
+http://127.0.0.1:8000/abonne/create/
+http://127.0.0.1:8000/abonne/update/5/
+
+
+------------------------------------
+1-pip freeze > requirements.txt : pour faire tt la creation des dependace de notre application
+1.1: verication des versions requirement
+2-creation Dockerfile
+3-Creation Projet dans GCP 
+4-activer docker build API
+5-verification des versions dans gcloud Shell

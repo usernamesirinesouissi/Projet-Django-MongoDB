@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'Authentification</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            max-width: 800px;
+            width: 90%;
+        }
+
+        .auth-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .auth-image img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .auth-form {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .auth-form h2 {
+            color: #15e297;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-custom {
+            background-color: #15e297;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+
+        .btn-custom:hover {
+            background-color: #0fc688;
+        }
+    </style>
+</head>
+<body>
+
+<div class="auth-container">
+    <div class="auth-card">
+        <!-- Section Image -->
+        {% load static %}
+        <div class="auth-image">
+            <img src="{% static 'images/auth.jpg' %}" alt="Image d'authentification">
+        </div>
+
+        <!-- Section Formulaire -->
+        <div class="auth-form">
+            <h2>Connexion</h2>
+            <!-- Affichage des messages d'erreur -->
+            {% if messages %}
+                <div class="alert alert-danger">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Entrez votre nom d'utilisateur" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+                </div>
+                <button type="submit" class="btn btn-custom">Se connecter</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

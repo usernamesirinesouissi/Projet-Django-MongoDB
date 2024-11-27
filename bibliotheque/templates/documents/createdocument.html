@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un Document</title>
+
+    <!-- Intégration du CSS de Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <!-- Intégration du JS de Flatpickr -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #15e297;
+        }
+
+        form {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #15e297;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            width: 200px;
+            margin: 0 auto;
+        }
+
+        button:hover {
+            background-color: #15e297;
+        }
+
+        .cancel-btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .cancel-btn:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Créer un Document</h1>
+        <form method="POST" action="{% url 'create_document' %}">
+            {% csrf_token %}
+            <label for="titre">Titre:</label>
+            <input type="text" id="titre" name="titre" required><br><br>
+
+            <label for="type">Type:</label>
+            <input type="text" id="type" name="type" required><br><br>
+
+            <label for="auteur">Auteur:</label>
+            <input type="text" id="auteur" name="auteur" required><br><br>
+
+            <label for="date_publication">Date de publication:</label>
+            <input type="date" id="date_publication" name="date_publication" required><br><br>
+
+            <label for="disponibilite">Disponibilité:</label>
+            <input type="checkbox" id="disponibilite" name="disponibilite"><br><br>
+
+            <button type="submit" class="btn btn-success">Enregistrer</button>
+        </form>
+
+        <a href="{% url 'list_document' %}" class="cancel-btn">Annuler</a>
+    </div>
+
+    <script>
+        // Initialisation de Flatpickr pour les champs de type 'date'
+        flatpickr("input[type=date]", {
+            dateFormat: "Y-m-d", // Format de la date
+            minDate: "today", // Vous pouvez spécifier la date minimale (facultatif)
+            locale: "fr", // Localisation en français
+        });
+    </script>
+
+</body>
+</html>
