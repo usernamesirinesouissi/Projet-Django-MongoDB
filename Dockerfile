@@ -9,7 +9,8 @@ COPY . /app/
 
 # Installer les dépendances à partir du fichier requirements.txt
 RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
 
 # Exposer le port 8000 pour le serveur Django
 EXPOSE 8000
